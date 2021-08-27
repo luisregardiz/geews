@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Data } from "../../interfaces";
+import { Posts } from "../../interfaces";
 
 export interface Props {
-    blogs: Data[];
+    blogs: Posts[];
 }
 
 const BlogList: FC<Props> = ({ blogs }) => {
@@ -12,7 +12,7 @@ const BlogList: FC<Props> = ({ blogs }) => {
             {blogs?.map(({ id, title, body, author, image }) => (
                 <div
                     key={id}
-                    className="rounded-lg shadow-lg p-4 md:first:col-span-2"
+                    className="rounded-lg shadow-lg p-4 md:first:col-span-2 "
                 >
                     <Link to={`/blog/${id}`}>
                         <img

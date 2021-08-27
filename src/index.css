@@ -4,10 +4,10 @@
 @tailwind components;
 
 .items-drawer {
-  @apply hover:bg-gray-900 hover:text-yellow-400 w-full py-2 rounded-md transition ease-in-out duration-150;
+  @apply hover:bg-black hover:text-yellow-400 w-full py-2 rounded-md transition ease-in-out duration-150 font-bold;
 }
 .btn-home {
-  @apply bg-yellow-400 py-3 px-5 uppercase font-bold rounded-md bg-opacity-80 hover:bg-opacity-100 transition duration-300 ease-in-out animate-bounce ;
+  @apply bg-black py-3 px-5 uppercase font-bold rounded-md  hover:bg-yellow-400 hover:text-black transition duration-300 ease-in-out animate-bounce text-yellow-400;
 }
 .home-page {
   @apply h-screen bg-black flex flex-col justify-center items-center space-y-6;
@@ -29,6 +29,17 @@
 
 .select-line-style {
   @apply block w-full mt-0 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black;
+}
+
+.btn-nav {
+  @apply py-2 px-4 border-2 border-black  hover:bg-black hover:text-yellow-400 rounded-md shadow font-bold transition duration-150 ease-in-out flex items-center;
+}
+.btn-submit {
+  @apply w-full text-center bg-black py-3 rounded-lg shadow-lg text-yellow-400 uppercase font-bold;
+}
+
+.btn-login {
+  @apply py-2 px-4 text-center w-full border-2 border-black font-bold hover:bg-black hover:text-white transition duration-150 ease-in-out rounded-md;
 }
 @tailwind utilities;
 

@@ -4,10 +4,10 @@ import { BlogFormEvent, CreateBlog, SubmitBlog } from "../../interfaces";
 interface CreateFormProps {
     postBlog: (blog: CreateBlog) => Promise<CreateBlog>;
     isLoading: boolean;
-    error: string
+    error: string;
 }
 
-const CreateForm: FC<CreateFormProps> = ({postBlog, isLoading, error}) => {
+const CreateForm: FC<CreateFormProps> = ({ postBlog, isLoading, error }) => {
     const initialValue: CreateBlog = {
         title: "",
         body: "",
@@ -34,7 +34,7 @@ const CreateForm: FC<CreateFormProps> = ({postBlog, isLoading, error}) => {
         setNewBlog((prev) => ({ ...prev, ...initialValue }));
     };
 
-    if(error) return <p>Opsss: {error}</p>
+    if (error) return <p>Opsss: {error}</p>;
 
     return (
         <form
@@ -92,10 +92,7 @@ const CreateForm: FC<CreateFormProps> = ({postBlog, isLoading, error}) => {
                     required
                 />
             </div>
-            <button
-                type="submit"
-                className=" w-full text-center bg-black py-3 rounded-lg shadow-lg text-yellow-400 uppercase font-bold"
-            >
+            <button type="submit" className="btn-submit">
                 {isLoading ? "Adding Blog..." : "Add Blog"}
             </button>
         </form>
