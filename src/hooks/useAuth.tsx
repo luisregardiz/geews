@@ -1,12 +1,12 @@
-import { User } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
-
-export const useAuth = (userData: User) => {
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserContext";
+export const useAuth = () => {
+    const { userData } = useContext(UserContext);
     const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
         if (Object.entries(userData).length > 1) return setIsLogged(true);
-        if (Object.entries(userData).length < 1) return setIsLogged(false);
+        setIsLogged(false);
     }, [userData]);
 
     return {

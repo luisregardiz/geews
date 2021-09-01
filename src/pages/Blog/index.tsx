@@ -3,8 +3,9 @@ import { FC } from "react";
 import useSWR from "swr";
 import BlogList from "../../components/Posts";
 import { fetcherPosts } from "../../helpers/fetcherposts";
-import Spinner from "../../components/Spinner";
 import { Posts } from "../../interfaces";
+import Loader from "../../components/Loader";
+import NetworkError from "../../components/Error/NetworkError";
 
 export interface BlogProps {}
 
@@ -14,12 +15,17 @@ const Blog: FC<BlogProps> = () => {
         fetcherPosts
     );
 
-    if (error) return <p>Sorry bruh</p>;
-    if (!posts) return <Spinner />;
+    if (error)
+        return (
+            <div className="min-h-screen">
+                {error.message === "Network Error" && <NetworkError />}
+            </div>
+        );
+    if (!posts) return <Loader />;
 
     return (
         <div className="section min-h-screen">
-            <BlogList blogs={posts as Posts[]} />
+            <BlogList posts={posts as Posts[]} />
         </div>
     );
 };

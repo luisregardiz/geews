@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import BlogContent from "../../../components/Post";
+import PostContent from "../../../components/Post";
 import NavBlog from "../../../components/NavBlog";
-import Spinner from "../../../components/Spinner";
 import { fetcherPost } from "../../../helpers/fetcherpost";
 import { Posts } from "../../../interfaces";
+import Loader from "../../../components/Loader";
+import NetworkError from "../../../components/Error/NetworkError";
 
 interface BlogDetailProps {}
 
@@ -21,15 +22,20 @@ const BlogDetail: FC<BlogDetailProps> = () => {
         fetcherPost
     );
 
-    if (error) <p>Opss sorry: {error.message}</p>;
+    if (error)
+        return (
+            <div className="min-h-screen">
+                {error.message === "Network Error" && <NetworkError />}
+            </div>
+        );
 
-    if (!data) return <Spinner />;
+    if (!data) return <Loader />;
 
     return (
         <div className="section">
             <div className="grid grid-flow-col lg:grid-cols-4 grid-cols-1 gap-5 place-content-center px-5  ">
                 {data?.map((post) => (
-                    <BlogContent key={post.id} post={post as Posts} />
+                    <PostContent key={post.id} post={post as Posts} />
                 ))}
 
                 <NavBlog />

@@ -27,12 +27,11 @@ const SignUpForm: FC<SignUpFormProps> = ({ signUpUser, error }) => {
         ev.preventDefault();
         signUpUser(signUp);
         if (error) return;
-        signUpUser(initialValue);
     };
     return (
         <div className="flex flex-col justify-center mt-10 items-center space-y-5">
             <h1 className="text-4xl font-black uppercase">Sign Up</h1>
-            <div className="  border-2 border-black  shadow-xl  flex items-center md:flex-row flex-col">
+            <div className="border-2 border-black shadow-xl flex items-center md:flex-row flex-col rounded-md">
                 <img
                     src={SignImg}
                     alt="sign_up_image"

@@ -1,99 +1,92 @@
-import { FC, useState } from "react";
-import { BlogFormEvent, CreateBlog, SubmitBlog } from "../../interfaces";
+import { FC, useContext, useState } from "react";
+import { UserContext } from "../../context/UserContext";
+import { BlogFormEvent, CreatePost, SubmitType } from "../../interfaces";
 
 interface CreateFormProps {
-    postBlog: (blog: CreateBlog) => Promise<CreateBlog>;
-    isLoading: boolean;
-    error: string;
+    postBlog: (blog: CreatePost) => void;
+    error: boolean;
 }
 
-const CreateForm: FC<CreateFormProps> = ({ postBlog, isLoading, error }) => {
-    const initialValue: CreateBlog = {
+const CreateForm: FC<CreateFormProps> = ({ postBlog, error }) => {
+    const initialValue: CreatePost = {
         title: "",
         body: "",
-        author: "",
         image: "",
     };
-
-    const [newBlog, setNewBlog] = useState(initialValue);
-
-    const handleNewBlog = (ev: BlogFormEvent) => {
+    const [newPost, setNewPost] = useState(initialValue);
+    const { userData } = useContext(UserContext);
+    const customId = userData.id.slice(0, 6);
+    const authorPost = userData?.user_metadata?.full_name || `Geek_${customId}`;
+    const authorAvatar = userData?.user_metadata?.avatar_url;
+    const handleNewPost = (ev: BlogFormEvent) => {
         const { name, value } = ev.target;
-        if (value === "") {
-            return console.log("error");
-        }
-        setNewBlog((prev) => ({
+
+        setNewPost((prev) => ({
             ...prev,
             [name]: value,
+            author: authorPost,
+            user_id: userData?.id,
+            author_avatar: authorAvatar,
         }));
     };
 
-    const handleSubmitBlog = (ev: SubmitBlog) => {
+    const handleSubmitPost = (ev: SubmitType) => {
         ev.preventDefault();
-        postBlog(newBlog);
-        setNewBlog((prev) => ({ ...prev, ...initialValue }));
+        postBlog(newPost);
+        if (error) return;
+        setNewPost((prev) => ({ ...prev, ...initialValue }));
     };
-
-    if (error) return <p>Opsss: {error}</p>;
 
     return (
         <form
-            className="space-y-5 w-1/3"
-            onSubmit={(ev) => handleSubmitBlog(ev)}
+            className="space-y-5 md:w-4/5  w-full border-2 border-black rounded-md shadow-xl p-10"
+            onSubmit={(ev) => handleSubmitPost(ev)}
         >
             <div className="form-group">
-                <label htmlFor="title">Blog title</label>
+                <label htmlFor="title" className="font-bold">
+                    Post title
+                </label>
                 <input
                     type="text"
                     name="title"
-                    value={newBlog.title}
+                    value={newPost.title}
                     placeholder="New smartphone, gadgets..."
                     className="input-line-style"
-                    onChange={(ev) => handleNewBlog(ev)}
+                    onChange={(ev) => handleNewPost(ev)}
                     required
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="body">Blog body</label>
+                <label htmlFor="body" className="font-bold">
+                    Post body
+                </label>
                 <textarea
                     name="body"
-                    value={newBlog.body}
+                    value={newPost.body}
                     placeholder="Add body here..."
-                    className="textarea-line-style"
-                    onChange={(ev) => handleNewBlog(ev)}
+                    className="textarea-line-style resize-none"
+                    onChange={(ev) => handleNewPost(ev)}
                     required
                 ></textarea>
             </div>
+
             <div className="form-group">
-                <label htmlFor="author">Author</label>
-                <select
-                    name="author"
-                    value={newBlog.author}
-                    className="select-line-style"
-                    onChange={(ev) => handleNewBlog(ev)}
-                    required
-                >
-                    <option value="">--Select author--</option>
-                    <option value="luis">Luis</option>
-                    <option value="maria">Maria</option>
-                    <option value="gamora">Gamora</option>
-                    <option value="levy">Levy</option>
-                </select>
-            </div>
-            <div className="form-group">
-                <label htmlFor="image">Blog image</label>
+                <label htmlFor="image" className="font-bold">
+                    Post image
+                </label>
                 <input
                     type="text"
                     name="image"
-                    value={newBlog.image}
+                    value={newPost.image}
                     placeholder="Url..."
                     className="input-line-style"
-                    onChange={(ev) => handleNewBlog(ev)}
+                    onChange={(ev) => handleNewPost(ev)}
                     required
                 />
             </div>
-            <button type="submit" className="btn-submit">
-                {isLoading ? "Adding Blog..." : "Add Blog"}
+            <span>Author: {authorPost}</span>
+            <button type="submit" className="btn-login">
+                Add Blog
             </button>
         </form>
     );

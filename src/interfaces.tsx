@@ -5,12 +5,21 @@ export interface Posts {
     id: number;
     image: string;
     user_id: string;
+    author_avatar: string;
 }
-
-export interface CreateBlog {
+export interface UserInfo {
+    user_id: string;
+    fname: string;
+    email: string | undefined;
+    password: string;
+    instagram: string;
+    twitter: string;
+    facebook: string;
+    bio: string;
+}
+export interface CreatePost {
     title: string;
     body: string;
-    author: string;
     image: string;
 }
 export interface User {
@@ -24,7 +33,6 @@ export interface UserData {
     aud: string;
     email: string;
 }
-export type SubmitBlog = React.FormEvent<HTMLFormElement>;
 export type InputType = React.ChangeEvent<HTMLInputElement>;
 export type SubmitType = React.FormEvent<HTMLFormElement>;
 

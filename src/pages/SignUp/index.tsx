@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { FC, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import SignUpForm from "../../components/SignUpForm";
+import { useAuth } from "../../hooks/useAuth";
 import { User } from "../../interfaces";
 import { supabase } from "../../supabaseClient";
 
@@ -10,14 +11,20 @@ export interface SignUpProps {}
 const SignUp: FC<SignUpProps> = () => {
     const history = useHistory();
     const [error, setError] = useState(false);
+    const { isLogged } = useAuth();
+
+    useEffect(() => {
+        if (isLogged) return history.push("/error");
+    }, [history, isLogged]);
+
     const signUpUser = async (signUp: User) => {
         try {
             const { user, error } = await supabase.auth.signUp(signUp);
             if (user) {
                 setError(false);
                 toast.success("Verify your email and Login");
+                history.push("/login");
             }
-            history.push("/login");
 
             if (error) {
                 setError(true);
@@ -30,7 +37,6 @@ const SignUp: FC<SignUpProps> = () => {
     };
     return (
         <div className="section min-h-screen">
-            <Toaster position="top-center" reverseOrder={false} />
             <SignUpForm signUpUser={signUpUser} error={error} />
         </div>
     );

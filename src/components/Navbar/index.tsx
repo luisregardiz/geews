@@ -1,9 +1,4 @@
-import {
-    MenuIcon,
-    NewspaperIcon,
-    UserIcon,
-    XIcon,
-} from "@heroicons/react/outline";
+import { MenuIcon, NewspaperIcon, XIcon } from "@heroicons/react/outline";
 import { User } from "@supabase/supabase-js";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -18,14 +13,13 @@ import Drawer from "../Drawer";
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [blockScroll, allowScroll] = useScrollBlock();
-    const { userData, setUserData } = useContext(UserContext);
-    const { isLogged } = useAuth(userData);
+    const { setUserData } = useContext(UserContext);
+    const { isLogged } = useAuth();
     const history = useHistory();
 
     const handleOpenDrawer = () => {
         setOpen((prev) => !prev);
     };
-
     const handleLogout = async () => {
         try {
             const { error } = await supabase.auth.signOut();
@@ -52,28 +46,8 @@ const Navbar = () => {
                     </span>
                 </Link>
             </div>
-            <div className="flex items-center space-x-4 mr-4">
-                {!isLogged && (
-                    <div className="flex space-x-4">
-                        <Link to="/login">
-                            <button className="btn-nav">
-                                Login <UserIcon className="w-4 ml-1" />
-                            </button>
-                        </Link>
-                        <Link to="/signup">
-                            <button className="btn-nav">Sign up</button>
-                        </Link>
-                    </div>
-                )}
-                {isLogged && (
-                    <div className="flex mr-2 space-x-4">
-                        <button className="btn-nav" onClick={handleLogout}>
-                            Logout
-                        </button>
-                        <Avatar email={userData.email as string} />
-                    </div>
-                )}
-            </div>
+
+            <Avatar isLogged={isLogged} handleLogout={handleLogout} />
 
             <div className="flex-none z-40 ">
                 <button

@@ -2,19 +2,19 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Posts } from "../../interfaces";
 
-export interface Props {
-    blogs: Posts[];
+export interface PostsListProps {
+    posts: Posts[];
 }
 
-const BlogList: FC<Props> = ({ blogs }) => {
+const PostsList: FC<PostsListProps> = ({ posts }) => {
     return (
         <div className="blog-list my-5 ">
-            {blogs?.map(({ id, title, body, author, image }) => (
+            {posts?.map(({ id, title, body, author, image }) => (
                 <div
                     key={id}
                     className="rounded-lg shadow-lg p-4 md:first:col-span-2 "
                 >
-                    <Link to={`/blog/${id}`}>
+                    <Link to={`/post/${id}`}>
                         <img
                             src={image}
                             alt={title}
@@ -33,4 +33,4 @@ const BlogList: FC<Props> = ({ blogs }) => {
     );
 };
 
-export default BlogList;
+export default PostsList;

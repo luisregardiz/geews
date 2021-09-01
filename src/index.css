@@ -7,7 +7,7 @@
   @apply hover:bg-black hover:text-yellow-400 w-full py-2 rounded-md transition ease-in-out duration-150 font-bold;
 }
 .btn-home {
-  @apply bg-black py-3 px-5 uppercase font-bold rounded-md  hover:bg-yellow-400 hover:text-black transition duration-300 ease-in-out animate-bounce text-yellow-400;
+  @apply bg-black py-3 px-5 uppercase font-bold rounded-md  hover:bg-yellow-400 hover:text-black transition duration-300 ease-in-out  text-yellow-400;
 }
 .home-page {
   @apply h-screen bg-black flex flex-col justify-center items-center space-y-6;
@@ -32,7 +32,7 @@
 }
 
 .btn-nav {
-  @apply py-2 px-4 border-2 border-black  hover:bg-black hover:text-yellow-400 rounded-md shadow font-bold transition duration-150 ease-in-out flex items-center;
+  @apply  px-4 py-2 bg-white rounded-md text-black font-bold;
 }
 .btn-submit {
   @apply w-full text-center bg-black py-3 rounded-lg shadow-lg text-yellow-400 uppercase font-bold;
@@ -40,6 +40,10 @@
 
 .btn-login {
   @apply py-2 px-4 text-center w-full border-2 border-black font-bold hover:bg-black hover:text-white transition duration-150 ease-in-out rounded-md;
+}
+
+.dropdown-user {
+  @apply bg-black flex flex-col p-8 text-yellow-400 absolute top-16 rounded-lg items-center border-t-4 border-yellow-400 space-y-2 font-bold;
 }
 @tailwind utilities;
 

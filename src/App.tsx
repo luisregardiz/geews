@@ -6,28 +6,31 @@ import Blog from "./pages/Blog";
 import BlogDetail from "./pages/Blog/Detail";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import { UserProvider } from "./context/UserContext";
 import { Toaster } from "react-hot-toast";
 import Error from "./components/Error";
+import { PrivateRoute } from "./components/PrivateRoute";
+import Profile from "./pages/Profile";
+import Account from "./pages/Account";
+import { UserProvider } from "./context/UserContext";
+import AccountSettings from "./pages/Account/Settings";
 
 function App() {
     return (
-        <UserProvider>
-            <Router>
+        <Router>
+            <UserProvider>
                 <Toaster position="top-center" reverseOrder={false} />
                 <Navbar />
                 <Switch>
                     <Route exact path="/">
                         <Home />
                     </Route>
-
                     <Route exact path="/blog">
                         <Blog />
                     </Route>
-                    <Route path="/create">
+                    <PrivateRoute path="/create">
                         <Create />
-                    </Route>
-                    <Route path="/blog/:id">
+                    </PrivateRoute>
+                    <Route path="/post/:id">
                         <BlogDetail />
                     </Route>
                     <Route path="/login">
@@ -36,12 +39,21 @@ function App() {
                     <Route path="/signup">
                         <SignUp />
                     </Route>
+                    <Route path="/profile/:user_id">
+                        <Profile />
+                    </Route>
+                    <Route exact path="/account">
+                        <Account />
+                    </Route>
+                    <Route path="/account/settings">
+                        <AccountSettings />
+                    </Route>
                     <Route path="*">
                         <Error />
                     </Route>
                 </Switch>
-            </Router>
-        </UserProvider>
+            </UserProvider>
+        </Router>
     );
 }
 

@@ -28,7 +28,6 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "dev": "npx json-server --watch data/db.json --port 4000",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

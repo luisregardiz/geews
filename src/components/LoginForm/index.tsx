@@ -5,9 +5,14 @@ import { InputType, SubmitType, User } from "../../interfaces";
 interface LoginFormProps {
     loginUser: (login: User) => void;
     error: boolean;
+    signInWithGoogle: () => void;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ loginUser, error }) => {
+const LoginForm: FC<LoginFormProps> = ({
+    loginUser,
+    error,
+    signInWithGoogle,
+}) => {
     const initialValue: User = {
         email: "",
         password: "",
@@ -24,8 +29,9 @@ const LoginForm: FC<LoginFormProps> = ({ loginUser, error }) => {
     const handleSubmit = (ev: SubmitType) => {
         ev.preventDefault();
         loginUser(login);
-        if (error) return;
-        setLogin(initialValue);
+        if (!error) {
+            return setLogin(initialValue);
+        }
     };
 
     return (
@@ -65,11 +71,15 @@ const LoginForm: FC<LoginFormProps> = ({ loginUser, error }) => {
                     <button className="btn-login" type="submit">
                         Login
                     </button>
-                    <button className="btn-login border-blue-600 text-blue-600 hover:bg-blue-600">
+                    <button
+                        onClick={signInWithGoogle}
+                        className="btn-login border-blue-600 text-blue-600 hover:bg-blue-600"
+                    >
                         Sign in with Google
                     </button>
                 </div>
             </form>
+
             <div>
                 <span>Don't have an account?</span>
                 <Link to="/signup" className="ml-2 font-bold hover:underline ">

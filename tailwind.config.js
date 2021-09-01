@@ -7,6 +7,7 @@ module.exports = {
     variants: {
         extend: {
             gridColumn: ["first"],
+            opacity: ["disabled"],
         },
     },
     plugins: [require("@tailwindcss/forms")],

@@ -6,6 +6,7 @@ type UserTypeContext = {
     session: Session;
     userData: User;
     setUserData: React.Dispatch<React.SetStateAction<User>>;
+    setSession: React.Dispatch<React.SetStateAction<Session>>;
 };
 export const UserContext = createContext({} as UserTypeContext);
 interface UserProviderType {
@@ -15,17 +16,16 @@ interface UserProviderType {
 export const UserProvider = ({ children }: UserProviderType) => {
     const [session, setSession] = useState<Session>({} as Session);
     const [userData, setUserData] = useState<User>({} as User);
-
     useEffect(() => {
         const userSession = supabase.auth.session();
-        if (!userSession) return;
+
         setSession((prev) => ({
             ...prev,
             ...userSession,
         }));
         setUserData((prev) => ({
             ...prev,
-            ...userSession.user,
+            ...userSession?.user,
         }));
 
         supabase.auth.onAuthStateChange((_event, session) => {
@@ -39,13 +39,13 @@ export const UserProvider = ({ children }: UserProviderType) => {
             }));
         });
     }, []);
-    console.log(userData);
     return (
         <UserContext.Provider
             value={{
                 session,
                 userData,
                 setUserData,
+                setSession,
             }}
         >
             {children}
