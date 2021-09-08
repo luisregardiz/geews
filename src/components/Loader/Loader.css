@@ -39,7 +39,7 @@
 }
 .cssload-loader:after {
 	left: 0;
-	border-left-color: rgb(255,212,38);
+	border-left-color: #F59E0B;
 }
 .cssload-loader:before {
 	right: 0;

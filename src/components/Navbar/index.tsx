@@ -7,8 +7,8 @@ import { UserContext } from "../../context/UserContext";
 import { useAuth } from "../../hooks/useAuth";
 import { useScrollBlock } from "../../hooks/useScrollBlock";
 import { supabase } from "../../supabaseClient";
-import Avatar from "../Avatar";
 import Drawer from "../Drawer";
+import UserNav from "./User";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -47,7 +47,7 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <Avatar isLogged={isLogged} handleLogout={handleLogout} />
+            <UserNav isLogged={isLogged} handleLogout={handleLogout} />
 
             <div className="flex-none z-40 ">
                 <button
@@ -61,12 +61,11 @@ const Navbar = () => {
                     )}
                 </button>
             </div>
-            {open && (
-                <Drawer
-                    handleOpenDrawer={handleOpenDrawer}
-                    isLogged={isLogged}
-                />
-            )}
+            <Drawer
+                handleOpenDrawer={handleOpenDrawer}
+                isLogged={isLogged}
+                open={open}
+            />
         </div>
     );
 };

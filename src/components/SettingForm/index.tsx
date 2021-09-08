@@ -1,6 +1,8 @@
 import { FC, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { useAuth } from "../../hooks/useAuth";
 import { BlogFormEvent, SubmitType, UserInfo } from "../../interfaces";
+import Loader from "../Loader";
 import Form from "./Form";
 
 export interface SettingsFormProps {
@@ -9,49 +11,41 @@ export interface SettingsFormProps {
 
 const SettingsForm: FC<SettingsFormProps> = ({ updateUserInfo }) => {
     const { userData } = useContext(UserContext);
+    const { isLogged } = useAuth();
     const [isProvider, setIsProvider] = useState(false);
-    const customId = userData?.id?.slice(0, 6);
-    const fullName = userData?.user_metadata?.full_name || `Geek_${customId}`;
-
-    const initialValues: UserInfo = {
-        user_id: userData.id,
-        fname: fullName,
-        email: userData.email,
-        password: "",
-        instagram: userData.user_metadata.instagram_url || "",
-        twitter: userData.user_metadata.twitter_url || "",
-        facebook: userData.user_metadata.facebook_url || "",
-        bio: userData.user_metadata.biography || "",
-    };
-    const [updateUser, setUpdateUser] = useState<UserInfo>(initialValues);
-
-    const avatarUser = () => {
-        const letter = userData.email?.charAt(0);
-        const avatarProvider = userData?.user_metadata?.avatar_url;
-        if (avatarProvider === undefined) {
-            return (
-                <span className="uppercase font-black text-lg text-yellow-400">
-                    {letter}
-                </span>
-            );
-        }
-
-        if (avatarProvider) {
-            return (
-                <img
-                    src={avatarProvider}
-                    alt={userData.user_metadata.full_name}
-                    className="object-cover rounded-full"
-                />
-            );
-        }
-    };
 
     useEffect(() => {
-        if (userData?.app_metadata?.provider === undefined)
-            return setIsProvider(true);
-        if (userData?.app_metadata?.provider === "email")
-            return setIsProvider(false);
+        if (Object.entries(userData).length > 1) {
+            const initialValues: UserInfo = {
+                user_id: userData.id,
+                fname: userData.user_metadata.full_name,
+                email: userData.email,
+                password: "",
+                instagram: userData.user_metadata.instagram_url,
+                twitter: userData.user_metadata.twitter_url,
+                facebook: userData.user_metadata.facebook_url,
+                bio: userData.user_metadata.biography,
+            };
+            return setUpdateUser(initialValues);
+        }
+    }, [userData]);
+    const initialValues: UserInfo = {
+        user_id: "",
+        fname: "",
+        email: "",
+        password: "",
+        instagram: "",
+        twitter: "",
+        facebook: "",
+        bio: "",
+    };
+
+    const [updateUser, setUpdateUser] = useState<UserInfo>(initialValues);
+
+    useEffect(() => {
+        const isProvider = userData?.app_metadata?.provider;
+        if (isProvider === undefined) return setIsProvider(true);
+        if (isProvider === "email") return setIsProvider(false);
         return setIsProvider(true);
     }, [userData?.app_metadata?.provider]);
 
@@ -67,11 +61,9 @@ const SettingsForm: FC<SettingsFormProps> = ({ updateUserInfo }) => {
         ev.preventDefault();
         updateUserInfo(updateUser);
     };
+    if (!isLogged) return <Loader />;
     return (
         <>
-            <div className="h-28 w-28 rounded-full relative bg-black top-8 flex justify-center items-center">
-                {avatarUser()}
-            </div>
             <Form
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}

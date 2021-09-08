@@ -1,10 +1,17 @@
-import { TrashIcon } from "@heroicons/react/outline";
+import {
+    PencilAltIcon,
+    RefreshIcon,
+    TrashIcon,
+    XIcon,
+} from "@heroicons/react/outline";
 import { FC, useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import { colorCategory } from "../../helpers/colorCategory";
 import { deletePost } from "../../helpers/deletePost";
 import { updatePost } from "../../helpers/updatePost";
 import { BlogFormEvent, Posts } from "../../interfaces";
+import UserInfo from "./UserInfo";
 
 interface PostContentProps {
     post: Posts;
@@ -12,7 +19,7 @@ interface PostContentProps {
 
 const PostContent: FC<PostContentProps> = ({ post }) => {
     const { userData, session } = useContext(UserContext);
-    const { id, title, body, image, user_id, author, author_avatar } = post;
+    const { id, title, body, image, user_id, author, category } = post;
     const initialValues = {
         id,
         title,
@@ -20,7 +27,7 @@ const PostContent: FC<PostContentProps> = ({ post }) => {
         image,
         user_id,
         author,
-        author_avatar,
+        category,
     };
     const [isEdit, setIsEdit] = useState(false);
     const [editPost, setEditPost] = useState(initialValues);
@@ -48,10 +55,10 @@ const PostContent: FC<PostContentProps> = ({ post }) => {
     };
 
     return (
-        <article className="col-span-3 flex flex-col items-center space-y-5 my-10 ">
+        <article className="col-span-3 flex flex-col items-center space-y-8 my-10 ">
             <div className="flex items-center flex-col">
                 {!isEdit ? (
-                    <h1 className="text-5xl font-black mb-5">{title}</h1>
+                    <h1 className="md:text-5xl text-3xl font-black">{title}</h1>
                 ) : (
                     <input
                         type="text"
@@ -62,35 +69,21 @@ const PostContent: FC<PostContentProps> = ({ post }) => {
                     />
                 )}
             </div>
+            <div
+                className={`self-start bg-${colorCategory(
+                    category
+                )} px-4 rounded-lg shadow-lg`}
+            >
+                <span className="uppercase font-black text-xs text-white">
+                    {category}
+                </span>
+            </div>
             <img
                 src={image}
                 alt={title}
                 className="object-cover md:w-4/5 w-full h-3/6 rounded-lg shadow-lg self-center"
             />
-            <div className="flex  items-center space-x-5 self-start  rounded-md shadow-xl px-5 py-3 border-t-2 border-yellow-400">
-                <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center shadow-lg ">
-                    {author_avatar && (
-                        <img
-                            src={author_avatar}
-                            className="object-cover w-12 h-12 rounded-full"
-                            alt={title}
-                        />
-                    )}
-                </div>
-                <div className="flex flex-col">
-                    <Link
-                        to={
-                            userData?.id === user_id
-                                ? "/account"
-                                : `/profile/${user_id}`
-                        }
-                        className="text-xl font-bold capitalize hover:underline"
-                    >
-                        {author}
-                    </Link>
-                    <span className=" italic">Blogger | Geek</span>
-                </div>
-            </div>
+            <UserInfo user_id={user_id} userData={userData} />
             <div className="md:max-w-screen-md w-auto leading-relaxed border-t-2 text-lg py-4">
                 {!isEdit ? (
                     <p className="whitespace-pre-line">{body}</p>
@@ -107,35 +100,35 @@ const PostContent: FC<PostContentProps> = ({ post }) => {
                 )}
             </div>
             {userData?.id === user_id && (
-                <div className="flex items-center space-x-4">
+                <div className="flex space-x-4">
                     {!isEdit ? (
                         <>
                             <button
                                 onClick={handleDelete}
-                                className="bg-red-500 text-lg text-white font-bold py-2 px-4 rounded flex items-center shadow-xl"
+                                className="bg-red-500 btn-post"
                             >
                                 Delete post <TrashIcon className="w-5 ml-1" />
                             </button>
                             <button
                                 onClick={() => setIsEdit((prev) => !prev)}
-                                className="bg-blue-600 font-bold text-white py-2 px-4 rounded flex items-center shadow-xl text-lg"
+                                className="bg-blue-600 btn-post"
                             >
-                                Edit
+                                Edit <PencilAltIcon className="w-5 ml-1" />
                             </button>
                         </>
                     ) : (
                         <>
                             <button
                                 onClick={() => setIsEdit((prev) => !prev)}
-                                className="bg-red-500 text-lg text-white font-bold py-2 px-4 rounded flex items-center shadow-xl"
+                                className="bg-red-500 btn-post"
                             >
-                                Cancel
+                                Cancel <XIcon className="w-5 ml-1" />
                             </button>
                             <button
                                 onClick={handleUpdatePost}
-                                className="bg-blue-600 font-bold text-white py-2 px-4 rounded flex items-center shadow-xl text-lg"
+                                className="bg-blue-600 btn-post"
                             >
-                                Update
+                                Update <RefreshIcon className="w-5 ml-1" />
                             </button>
                         </>
                     )}

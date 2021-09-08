@@ -39,6 +39,7 @@ export const UserProvider = ({ children }: UserProviderType) => {
             }));
         });
     }, []);
+
     return (
         <UserContext.Provider
             value={{

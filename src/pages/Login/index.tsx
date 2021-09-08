@@ -20,17 +20,14 @@ const Login: FC<LoginProps> = () => {
 
     const loginUser = async (login: User) => {
         try {
-            const { user, error } = await supabase.auth.signIn(login, {
-                redirectTo: "http://localhost:3000/account",
-            });
-            if (error) {
+            const { user, error } = await supabase.auth.signIn(login);
+            if (error || !user) {
                 setError(true);
-                toast.error(error.message);
+                toast.error(error?.message as string);
                 return;
             }
-            if (!user) return;
+            history.push("/account");
             toast.success("Welcome");
-            history.push("/blog");
         } catch (error) {
             setError(true);
         }
@@ -45,14 +42,13 @@ const Login: FC<LoginProps> = () => {
                 { redirectTo: "http://localhost:3000/account" }
             );
 
-            if (error) return;
+            if (error) return toast.error(error.message);
             if (user) {
                 toast.success("Welcome");
                 history.push("/blog");
             }
         } catch (error) {
             console.error(error);
-            toast.error(error.message);
         }
     };
 

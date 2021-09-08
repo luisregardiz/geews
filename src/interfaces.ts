@@ -4,8 +4,8 @@ export interface Posts {
     author: string;
     id: number;
     image: string;
+    category: string;
     user_id: string;
-    author_avatar: string;
 }
 export interface UserInfo {
     user_id: string;
@@ -16,16 +16,28 @@ export interface UserInfo {
     twitter: string;
     facebook: string;
     bio: string;
+    avatar_url?: string;
 }
 export interface CreatePost {
     title: string;
     body: string;
     image: string;
+    category: string;
 }
 export interface User {
     username?: string;
     email: string;
     password: string;
+}
+
+export interface Profile {
+    user_id: string;
+    full_name: string;
+    instagram_url: string;
+    twitter_url: string;
+    facebook_url: string;
+    biography: string;
+    avatar_url: string;
 }
 
 export interface UserData {

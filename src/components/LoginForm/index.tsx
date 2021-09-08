@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { InputType, SubmitType, User } from "../../interfaces";
+import GoogleIcon from "../../images/google.svg";
 
 interface LoginFormProps {
     loginUser: (login: User) => void;
@@ -35,7 +36,7 @@ const LoginForm: FC<LoginFormProps> = ({
     };
 
     return (
-        <div className="flex flex-col justify-center mt-10 items-center space-y-5">
+        <div className="flex flex-col justify-center mt-10 items-center space-y-5 ">
             <h1 className="text-4xl font-black uppercase">Login</h1>
             <form
                 className="space-y-5 border-2 border-black rounded-md  shadow-xl p-10"
@@ -67,15 +68,23 @@ const LoginForm: FC<LoginFormProps> = ({
                         required
                     />
                 </div>
+                <Link
+                    to="/forgot"
+                    className="text-sm inline-flex  hover:underline"
+                >
+                    Forgot your password?
+                </Link>
                 <div className="space-y-3">
                     <button className="btn-login" type="submit">
                         Login
                     </button>
                     <button
                         onClick={signInWithGoogle}
-                        className="btn-login border-blue-600 text-blue-600 hover:bg-blue-600"
+                        type="button"
+                        className="btn bg-blue-600  text-white w-full rounded-md shadow-none border-2 border-blue-600 "
                     >
                         Sign in with Google
+                        <img src={GoogleIcon} alt="Google" className="ml-2" />
                     </button>
                 </div>
             </form>

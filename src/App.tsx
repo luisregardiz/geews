@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Account from "./pages/Account";
 import { UserProvider } from "./context/UserContext";
 import AccountSettings from "./pages/Account/Settings";
+import Forgot from "./pages/Login/Forgot";
 
 function App() {
     return (
@@ -35,6 +36,9 @@ function App() {
                     </Route>
                     <Route path="/login">
                         <Login />
+                    </Route>
+                    <Route path="/forgot">
+                        <Forgot />
                     </Route>
                     <Route path="/signup">
                         <SignUp />

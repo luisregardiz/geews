@@ -9,15 +9,16 @@ export interface AccountProps {}
 const Account: FC<AccountProps> = () => {
     const { userData } = useContext(UserContext);
     const history = useHistory();
+    console.log(userData);
     useEffect(() => {
         if (userData.user_metadata === undefined) return;
         const metadata = Object.entries(userData.user_metadata);
-        if (metadata?.length < 5) {
+        if (metadata?.length < 3) {
             return history.push("/account/settings");
         }
     }, [history, userData?.user_metadata]);
     return (
-        <div className="section">
+        <div className="section min-h-screen">
             <UserAccount />
             <UserPosts />
         </div>

@@ -22,6 +22,5 @@ export const updatePost = async (post: Posts, session: Session) => {
         return update;
     } catch (error) {
         console.log(error);
-        toast.error(error.message);
     }
 };

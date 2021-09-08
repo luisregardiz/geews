@@ -1,32 +1,34 @@
+import { PlusIcon, UserIcon } from "@heroicons/react/outline";
 import { FC, useContext, useState } from "react";
+import { FaImages } from "react-icons/fa";
+import { VscLoading } from "react-icons/vsc";
 import { UserContext } from "../../context/UserContext";
 import { BlogFormEvent, CreatePost, SubmitType } from "../../interfaces";
+import Categories from "./Categories";
 
 interface CreateFormProps {
     postBlog: (blog: CreatePost) => void;
     error: boolean;
+    loading: boolean;
 }
 
-const CreateForm: FC<CreateFormProps> = ({ postBlog, error }) => {
+const CreateForm: FC<CreateFormProps> = ({ postBlog, error, loading }) => {
     const initialValue: CreatePost = {
         title: "",
         body: "",
         image: "",
+        category: "",
     };
     const [newPost, setNewPost] = useState(initialValue);
     const { userData } = useContext(UserContext);
-    const customId = userData.id.slice(0, 6);
-    const authorPost = userData?.user_metadata?.full_name || `Geek_${customId}`;
-    const authorAvatar = userData?.user_metadata?.avatar_url;
+    const authorPost = userData?.user_metadata?.full_name;
     const handleNewPost = (ev: BlogFormEvent) => {
         const { name, value } = ev.target;
 
         setNewPost((prev) => ({
             ...prev,
             [name]: value,
-            author: authorPost,
             user_id: userData?.id,
-            author_avatar: authorAvatar,
         }));
     };
 
@@ -71,22 +73,34 @@ const CreateForm: FC<CreateFormProps> = ({ postBlog, error }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="image" className="font-bold">
-                    Post image
+                <label htmlFor="image" className="font-bold flex items-center">
+                    Post image <FaImages className="text-xl ml-2" />
                 </label>
                 <input
                     type="text"
                     name="image"
                     value={newPost.image}
-                    placeholder="Url..."
+                    placeholder="Image url..."
                     className="input-line-style"
                     onChange={(ev) => handleNewPost(ev)}
                     required
                 />
             </div>
-            <span>Author: {authorPost}</span>
-            <button type="submit" className="btn-login">
-                Add Blog
+            <Categories handleNewPost={handleNewPost} />
+            <span className="flex mt-2 items-center">
+                <UserIcon className="w-5 mr-1" />
+                Author: {authorPost}
+            </span>
+            <button type="submit" className="btn-login ">
+                {loading ? (
+                    <span className="flex items-center justify-center">
+                        Adding... <VscLoading className="text-lg ml-2" />
+                    </span>
+                ) : (
+                    <span className="flex items-center justify-center">
+                        Add Blog <PlusIcon className="w-5 ml-2" />
+                    </span>
+                )}
             </button>
         </form>
     );
