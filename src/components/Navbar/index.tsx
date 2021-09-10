@@ -37,8 +37,8 @@ const Navbar = () => {
     }, [allowScroll, blockScroll, open]);
 
     return (
-        <div className="flex py-4 px-5 items-center  ">
-            <div className="flex-1 px-2 mx-2">
+        <div className="flex py-4 px-5 items-center justify-between  ">
+            <div className=" px-2 mx-2">
                 <Link to="/">
                     <span className="text-lg font-black uppercase flex items-center ">
                         <NewspaperIcon className="w-6 mr-2" />
@@ -46,26 +46,27 @@ const Navbar = () => {
                     </span>
                 </Link>
             </div>
+            <div className="flex items-center">
+                <UserNav isLogged={isLogged} handleLogout={handleLogout} />
 
-            <UserNav isLogged={isLogged} handleLogout={handleLogout} />
-
-            <div className="flex-none z-40 ">
-                <button
-                    className="hover:bg-black hover:bg-opacity-10 p-1.5 rounded-full"
-                    onClick={handleOpenDrawer}
-                >
-                    {open ? (
-                        <XIcon className="w-8 font-weight" />
-                    ) : (
-                        <MenuIcon className="w-8 font-weight" />
-                    )}
-                </button>
+                <div className="flex-none z-40 ">
+                    <button
+                        className="hover:bg-black hover:bg-opacity-10 p-1.5 rounded-full"
+                        onClick={handleOpenDrawer}
+                    >
+                        {open ? (
+                            <XIcon className="w-8 font-weight" />
+                        ) : (
+                            <MenuIcon className="w-8 font-weight" />
+                        )}
+                    </button>
+                </div>
+                <Drawer
+                    handleOpenDrawer={handleOpenDrawer}
+                    isLogged={isLogged}
+                    open={open}
+                />
             </div>
-            <Drawer
-                handleOpenDrawer={handleOpenDrawer}
-                isLogged={isLogged}
-                open={open}
-            />
         </div>
     );
 };

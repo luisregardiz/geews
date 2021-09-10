@@ -1,17 +1,17 @@
 import { PencilAltIcon, UserAddIcon, UserIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
-import HomeBG from "../../images/homepage.svg";
-import GoogleIcon from "../../images/google.svg";
+import HomeBG from "../../../images/homepage.svg";
+import GoogleIcon from "../../../images/google.svg";
 import { FC } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 
 interface HeroProps {}
 
 const Hero: FC<HeroProps> = () => {
     const { isLogged } = useAuth();
     return (
-        <div className="section min-h-screen ">
-            <div className=" flex flex-col md:flex-row w-full items-center justify-between md:space-y-0 space-y-10 mt-5">
+        <div className="section min-h-screen mt-10 ">
+            <div className=" flex flex-col md:flex-row w-full items-center justify-between md:space-y-0 space-y-10 my-5">
                 <div>
                     <img src={HomeBG} alt="Home" className="object-contain " />
                 </div>

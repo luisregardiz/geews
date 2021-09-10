@@ -40,44 +40,46 @@ const UserAccount: FC<UserAccountProps> = () => {
 
     return (
         <div>
-            <div className=" w-full mx-auto bg-black flex  md:flex-row flex-col items-center p-5 rounded-xl shadow-xl mt-5 md:divide-x-2  text-white  space-x-5 ">
-                <div className=" ">
+            <div className="bg-black flex md:flex-row flex-col items-center p-10 rounded-xl shadow-xl mt-5 md:divide-x-2  text-white md:space-x-5 space-y-4 md:space-y-0 text-center ">
+                <div>
                     <div className="bg-black rounded-full flex items-center justify-center text-5xl font-bold text-yellow-400  w-24 h-24">
                         {avatarUser()}
                     </div>
                 </div>
-                <div className="flex flex-col pl-5 my-5 ">
+                <div className="flex flex-col md:pl-5  space-y-4 ">
                     <div>
                         <span className="uppercase font-black text-gray-300 text-xs">
                             Name:
                         </span>
-                        <div>{username}</div>
+                        <p className="text-lg">{username}</p>
                     </div>
                     <div>
                         <span className="uppercase font-black text-gray-300 text-xs">
                             Email:
                         </span>
-                        <p>{userData?.email}</p>
+                        <p className="text-lg">{userData?.email}</p>
                     </div>
                 </div>
-                <div className="flex flex-col pl-5  space-y-4">
+                <div className="flex flex-col md:pl-5 space-y-4 ">
                     <div>
                         <span className="uppercase font-black text-gray-300 text-xs">
                             Account created:
                         </span>
-                        <p>{createDate(userData?.confirmed_at as string)}</p>
+                        <p className="text-lg">
+                            {createDate(userData?.confirmed_at as string)}
+                        </p>
                     </div>
                     <div>
                         <span className="uppercase font-black text-gray-300 text-xs">
                             Account authenticated:
                         </span>
                         {userData?.aud === "authenticated" ? (
-                            <p className="text-green-500 font-bold flex items-center">
+                            <p className="text-green-500 font-bold flex items-center justify-center">
                                 Authenticated
                                 <CheckCircleIcon className="w-4 ml-1" />
                             </p>
                         ) : (
-                            <p className="text-red-500 font-bold flex items-center">
+                            <p className="text-red-500 font-bold flex items-center justify-center">
                                 No authenticated
                                 <XCircleIcon className="w-4 ml-1" />
                             </p>

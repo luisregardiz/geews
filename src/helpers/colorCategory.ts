@@ -15,7 +15,7 @@ export const colorCategory = (category: string) => {
         case "sports":
             return "indigo-500";
         case "finance":
-            return "blue-500";
+            return "green-500";
         case "political":
             return "gray-500";
         case "movies":
@@ -25,6 +25,6 @@ export const colorCategory = (category: string) => {
         case "news":
             return "indigo-700";
         default:
-            break;
+            return "green-700";
     }
 };

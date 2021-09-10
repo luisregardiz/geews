@@ -42,40 +42,42 @@ const UserProfile: FC<UserProfileProps> = ({ profile }) => {
                     </span>
                     <p>{biography}</p>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 ">
                     <span className="uppercase font-black text-gray-300 text-xs">
                         Social Network:
                     </span>
-                    {facebook_url && (
-                        <a
-                            href={facebook_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-bold text-xl"
-                        >
-                            <FaFacebook />
-                        </a>
-                    )}
-                    {instagram_url && (
-                        <a
-                            href={instagram_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-bold text-xl"
-                        >
-                            <FaInstagram />
-                        </a>
-                    )}
-                    {twitter_url && (
-                        <a
-                            href={twitter_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-bold text-xl"
-                        >
-                            <FaTwitter />
-                        </a>
-                    )}
+                    <div className="flex space-x-4 flex-wrap my-3">
+                        {facebook_url && (
+                            <a
+                                href={facebook_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-bold text-xl"
+                            >
+                                <FaFacebook />
+                            </a>
+                        )}
+                        {instagram_url && (
+                            <a
+                                href={instagram_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-bold text-xl"
+                            >
+                                <FaInstagram />
+                            </a>
+                        )}
+                        {twitter_url && (
+                            <a
+                                href={twitter_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-bold text-xl"
+                            >
+                                <FaTwitter />
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

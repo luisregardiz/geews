@@ -15,7 +15,6 @@ const Form: FC<FormProps> = ({
     isProvider,
     handleSubmit,
 }) => {
-    console.log(updateUser);
     return (
         <>
             <form
