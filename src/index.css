@@ -43,7 +43,7 @@
 }
 
 .btn-post {
-  @apply font-bold text-white py-2 px-4 rounded-lg flex items-center shadow-xl text-lg;
+  @apply font-bold text-white py-2 px-4 rounded-lg flex items-center shadow-xl ;
 }
 .dropdown-user {
   @apply bg-black flex flex-col p-8 text-yellow-400 absolute top-16 rounded-lg items-center border-t-4 border-yellow-400 space-y-2 font-bold;
@@ -52,13 +52,64 @@
 .btn {
   @apply px-4 py-2  rounded-lg font-bold  shadow-lg flex items-center justify-center transition duration-150 ease-in-out hover:opacity-90;
 }
+
+.user-info {
+  @apply bg-black flex md:flex-row flex-col items-center p-10 rounded-xl shadow-xl mt-5 md:divide-x-2  text-white md:space-x-5 space-y-4 md:space-y-0 text-center md:text-left;
+}
+
 @tailwind utilities;
 
 body {
   margin: 0;
-  font-family: 'Urbanist', sans-serif;
+  font-family: 'Urbanist', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+}
+h1 {
+  font-size: 3rem;
+
+}
+h2 {
+  font-size: 2.25rem;
+}
+h3 {
+  font-size: 1.875rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+body::-webkit-scrollbar, .drawer::-webkit-scrollbar, .categories::-webkit-scrollbar {
+  width: 8px;     
+  height: 8px;    
+  display: block;  
+}
+body::-webkit-scrollbar-thumb, .drawer::-webkit-scrollbar-thumb, .categories::-webkit-scrollbar-thumb {
+  background:#FCD34D;
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover, .drawer::-webkit-scrollbar-thumb:hover, .categories::-webkit-scrollbar-thumb:hover {
+  background: #FCD34D;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar-thumb:active, .drawer::-webkit-scrollbar-thumb:active, .categories::-webkit-scrollbar-thumb:active {
+  background-color: #FBBF24;
+}
+body::-webkit-scrollbar-track, .drawer::-webkit-scrollbar-track, .categories::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-track:hover,
+body::-webkit-scrollbar-track:active,
+.drawer::-webkit-scrollbar-track:hover,
+.drawer::-webkit-scrollbar-track:active,
+.categories::-webkit-scrollbar-track:hover,
+.categories::-webkit-scrollbar-track:active {
+background: #e1e1e1;
 }
 
 

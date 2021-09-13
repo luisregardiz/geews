@@ -40,7 +40,7 @@ const UserAccount: FC<UserAccountProps> = () => {
 
     return (
         <div>
-            <div className="bg-black flex md:flex-row flex-col items-center p-10 rounded-xl shadow-xl mt-5 md:divide-x-2  text-white md:space-x-5 space-y-4 md:space-y-0 text-center ">
+            <div className="user-info">
                 <div>
                     <div className="bg-black rounded-full flex items-center justify-center text-5xl font-bold text-yellow-400  w-24 h-24">
                         {avatarUser()}
@@ -74,12 +74,12 @@ const UserAccount: FC<UserAccountProps> = () => {
                             Account authenticated:
                         </span>
                         {userData?.aud === "authenticated" ? (
-                            <p className="text-green-500 font-bold flex items-center justify-center">
+                            <p className="text-green-500 font-bold flex items-center md:justify-start justify-center">
                                 Authenticated
                                 <CheckCircleIcon className="w-4 ml-1" />
                             </p>
                         ) : (
-                            <p className="text-red-500 font-bold flex items-center justify-center">
+                            <p className="text-red-500 font-bold flex items-center md:justify-start justify-center">
                                 No authenticated
                                 <XCircleIcon className="w-4 ml-1" />
                             </p>

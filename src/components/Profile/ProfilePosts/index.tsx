@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Posts } from "../../../interfaces";
-import PostsList from "../../Posts";
+import BlogList from "../../Posts";
 
 interface ProfilePostsProps {
     posts: Posts[];
@@ -8,15 +8,13 @@ interface ProfilePostsProps {
 const ProfilePosts: FC<ProfilePostsProps> = ({ posts }) => {
     return (
         <div>
-            <div className="px-2">
-                <h1 className="text-3xl font-bold text-gray-700">Posts</h1>
-            </div>
+            <h1 className="text-3xl font-bold text-gray-700">Posts</h1>
             {posts?.length < 1 && (
                 <div>
                     <p>This user has no posts</p>
                 </div>
             )}
-            <PostsList posts={posts as Posts[]} />
+            <BlogList posts={posts as Posts[]} />
         </div>
     );
 };

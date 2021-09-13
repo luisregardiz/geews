@@ -33,32 +33,9 @@ const Login: FC<LoginProps> = () => {
         }
     };
 
-    const signInWithGoogle = async () => {
-        try {
-            const { user, error } = await supabase.auth.signIn(
-                {
-                    provider: "google",
-                },
-                { redirectTo: "http://localhost:3000/account" }
-            );
-
-            if (error) return toast.error(error.message);
-            if (user) {
-                toast.success("Welcome");
-                history.push("/blog");
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     return (
         <div className="section min-h-screen">
-            <LoginForm
-                loginUser={loginUser}
-                error={error}
-                signInWithGoogle={signInWithGoogle}
-            />
+            <LoginForm loginUser={loginUser} error={error} />
         </div>
     );
 };

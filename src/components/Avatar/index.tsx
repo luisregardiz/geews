@@ -20,7 +20,6 @@ const Avatar: FC<AvatarProps> = ({ url, onUpload }) => {
     const userAvatar: string = userData.user_metadata?.avatar_url;
 
     const { avatarUrl: prevAvatar } = useAvatar(userAvatar);
-    console.log(userAvatar);
 
     useEffect(() => {
         if (url) downloadImage(url);

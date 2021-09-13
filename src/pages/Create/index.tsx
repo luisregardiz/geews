@@ -33,8 +33,8 @@ const Create = () => {
 
     return (
         <div className="section">
-            <div className=" flex flex-col items-center mt-10 min-h-screen">
-                <h1 className="text-4xl font-bold my-10">Create a new post</h1>
+            <div className=" flex flex-col min-h-screen">
+                <h1 className="text-4xl font-black mt-5">Create a new post</h1>
                 <CreateForm
                     postBlog={postBlog}
                     error={error}

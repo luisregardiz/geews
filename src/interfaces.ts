@@ -1,11 +1,14 @@
 export interface Posts {
     title: string;
+    image: string;
     body: string;
     author: string;
     id: number;
-    image: string;
     category: string;
+    youtube: string;
+    twitter: string;
     user_id: string;
+    created_at?: string;
 }
 export interface UserInfo {
     user_id: string;
@@ -20,9 +23,11 @@ export interface UserInfo {
 }
 export interface CreatePost {
     title: string;
-    body: string;
     image: string;
+    body: string;
     category: string;
+    twitter: string;
+    youtube: string;
 }
 export interface User {
     username?: string;

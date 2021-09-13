@@ -6,6 +6,7 @@ import { fetcherPosts } from "../../helpers/fetcherposts";
 import { Posts } from "../../interfaces";
 import Loader from "../../components/Loader";
 import NetworkError from "../../components/Error/NetworkError";
+import FilterSection from "../../components/FilterSection";
 
 export interface BlogProps {}
 
@@ -24,9 +25,11 @@ const Blog: FC<BlogProps> = () => {
     if (!posts) return <Loader />;
 
     return (
-        <div className="section min-h-screen">
+        <main className="section min-h-screen">
+            <h1 className="md:text-6xl text-3xl font-black">all posts</h1>
+            <FilterSection />
             <BlogList posts={posts as Posts[]} />
-        </div>
+        </main>
     );
 };
 

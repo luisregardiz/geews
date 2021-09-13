@@ -2,6 +2,7 @@ import { CogIcon, NewspaperIcon, PlusIcon } from "@heroicons/react/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import Categories from "./Categories";
 export interface DrawerProps {
     handleOpenDrawer: () => void;
     isLogged: boolean;
@@ -44,7 +45,7 @@ const Drawer: FC<DrawerProps> = ({ handleOpenDrawer, isLogged, open }) => {
         <AnimatePresence>
             {open && (
                 <motion.div
-                    className="bg-black w-full h-full min-h-screen absolute top-0 left-0 bg-opacity-20 z-30 "
+                    className="bg-black w-full h-full min-h-screen absolute top-0 left-0 bg-opacity-20 z-30 flex items-end justify-end "
                     onClick={handleOpenDrawer}
                     variants={bgDrawerVariants}
                     initial="hidden"
@@ -52,24 +53,25 @@ const Drawer: FC<DrawerProps> = ({ handleOpenDrawer, isLogged, open }) => {
                     exit="hidden"
                 >
                     <motion.div
-                        className="bg-yellow-400 h-full min-h-screen md:w-1/4 w-4/5 absolute top-0 right-0 shadow-xl cursor-auto z-0"
+                        className="bg-yellow-400 h-full min-h-screen md:w-1/4 w-4/5  shadow-xl cursor-auto z-10 overflow-y-scroll drawer"
                         variants={drawerVariants}
                     >
-                        <div className="flex flex-col w-full h-full text-lg uppercase   p-5 mt-12  ">
+                        <div className="flex flex-col w-full h-full text-lg  p-5 mt-10 ">
                             <h4 className="text-2xl font-black text-yellow-700 my-2 px-4">
                                 Blog
                             </h4>
                             <Link
-                                to="/blog"
-                                className="items-drawer px-4  font-black flex items-center "
+                                to="/posts"
+                                className="items-drawer px-4 font-bold flex items-center "
                             >
                                 Posts <NewspaperIcon className="w-5 ml-1" />
                             </Link>
+                            <Categories />
                             {isLogged && (
                                 <>
                                     <Link
                                         to="/create"
-                                        className="items-drawer px-4  font-black flex items-center"
+                                        className="items-drawer px-4  font-bold flex items-center"
                                     >
                                         Create New Post
                                         <PlusIcon className="w-5 ml-1" />
@@ -79,9 +81,9 @@ const Drawer: FC<DrawerProps> = ({ handleOpenDrawer, isLogged, open }) => {
                                     </h4>
                                     <Link
                                         to="/account/settings"
-                                        className="items-drawer px-4  font-black flex items-center "
+                                        className="items-drawer px-4  font-bold flex items-center "
                                     >
-                                        Settings{" "}
+                                        Settings
                                         <CogIcon className="w-5 ml-1" />
                                     </Link>
                                 </>

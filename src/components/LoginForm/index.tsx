@@ -2,18 +2,14 @@ import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { InputType, SubmitType, User } from "../../interfaces";
 import GoogleIcon from "../../images/google.svg";
+import { signInWithGoogle } from "../../helpers/signInWithGoogle";
 
 interface LoginFormProps {
     loginUser: (login: User) => void;
     error: boolean;
-    signInWithGoogle: () => void;
 }
 
-const LoginForm: FC<LoginFormProps> = ({
-    loginUser,
-    error,
-    signInWithGoogle,
-}) => {
+const LoginForm: FC<LoginFormProps> = ({ loginUser, error }) => {
     const initialValue: User = {
         email: "",
         password: "",

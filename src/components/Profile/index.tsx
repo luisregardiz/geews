@@ -20,7 +20,7 @@ const UserProfile: FC<UserProfileProps> = ({ profile }) => {
     const { avatarUrl } = useAvatar(avatar_url);
 
     return (
-        <div className="bg-black text-white rounded-xl shadow-xl inline-flex flex-col items-center p-10 min-w-max">
+        <div className="bg-black text-white rounded-xl shadow-xl lg:inline-flex flex flex-col items-center p-10 min-w-max">
             {avatarUrl ? (
                 <img
                     src={avatarUrl}

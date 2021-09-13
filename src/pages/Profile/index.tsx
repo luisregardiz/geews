@@ -28,12 +28,16 @@ const Profile: FC<ProfileProps> = () => {
     }
 
     return (
-        <div className="section flex md:flex-row flex-col md:space-x-3 space-y-3">
-            {userInfo.map((profile) => (
-                <UserProfile profile={profile} key={profile.user_id} />
-            ))}
-            <ProfilePosts posts={userPosts} />
-        </div>
+        <main className="section min-h-screen flex gap-5 lg:flex-row flex-col  ">
+            <div>
+                {userInfo.map((profile) => (
+                    <UserProfile profile={profile} key={profile.user_id} />
+                ))}
+            </div>
+            <div className="grid grid-cols-1">
+                <ProfilePosts posts={userPosts} />
+            </div>
+        </main>
     );
 };
 

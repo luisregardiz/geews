@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { BlogFormEvent, SubmitType, UserInfo } from "../../interfaces";
-import Loader from "../Loader";
 
 export interface FormProps {
     handleChange: (ev: BlogFormEvent) => void;

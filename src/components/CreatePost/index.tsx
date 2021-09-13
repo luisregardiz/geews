@@ -1,10 +1,13 @@
 import { PlusIcon, UserIcon } from "@heroicons/react/outline";
 import { FC, useContext, useState } from "react";
-import { FaImages } from "react-icons/fa";
 import { VscLoading } from "react-icons/vsc";
+import ReactQuill from "react-quill";
 import { UserContext } from "../../context/UserContext";
 import { BlogFormEvent, CreatePost, SubmitType } from "../../interfaces";
 import Categories from "./Categories";
+import { modules, formats } from "../../helpers/customToolbar";
+import "react-quill/dist/quill.snow.css";
+import AddButton from "./AddButton";
 
 interface CreateFormProps {
     postBlog: (blog: CreatePost) => void;
@@ -15,10 +18,13 @@ interface CreateFormProps {
 const CreateForm: FC<CreateFormProps> = ({ postBlog, error, loading }) => {
     const initialValue: CreatePost = {
         title: "",
-        body: "",
         image: "",
+        body: "",
         category: "",
+        twitter: "",
+        youtube: "",
     };
+    const [editorValue, setEditorValue] = useState("");
     const [newPost, setNewPost] = useState(initialValue);
     const { userData } = useContext(UserContext);
     const authorPost = userData?.user_metadata?.full_name;
@@ -27,6 +33,7 @@ const CreateForm: FC<CreateFormProps> = ({ postBlog, error, loading }) => {
 
         setNewPost((prev) => ({
             ...prev,
+            body: editorValue,
             [name]: value,
             user_id: userData?.id,
         }));
@@ -41,16 +48,17 @@ const CreateForm: FC<CreateFormProps> = ({ postBlog, error, loading }) => {
 
     return (
         <form
-            className="space-y-5 md:w-4/5  w-full border-2 border-black rounded-md shadow-xl p-10"
+            className="space-y-5 my-10"
             onSubmit={(ev) => handleSubmitPost(ev)}
         >
             <div className="form-group">
                 <label htmlFor="title" className="font-bold">
-                    Post title
+                    Title
                 </label>
                 <input
                     type="text"
                     name="title"
+                    id="title"
                     value={newPost.title}
                     placeholder="New smartphone, gadgets..."
                     className="input-line-style"
@@ -59,39 +67,45 @@ const CreateForm: FC<CreateFormProps> = ({ postBlog, error, loading }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="body" className="font-bold">
-                    Post body
-                </label>
-                <textarea
-                    name="body"
-                    value={newPost.body}
-                    placeholder="Add body here..."
-                    className="textarea-line-style resize-none"
-                    onChange={(ev) => handleNewPost(ev)}
-                    required
-                ></textarea>
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="image" className="font-bold flex items-center">
-                    Post image <FaImages className="text-xl ml-2" />
+                <label htmlFor="image" className="font-bold">
+                    Image URL
                 </label>
                 <input
                     type="text"
                     name="image"
+                    id="image"
                     value={newPost.image}
-                    placeholder="Image url..."
+                    placeholder="https://..."
                     className="input-line-style"
                     onChange={(ev) => handleNewPost(ev)}
                     required
                 />
             </div>
+
+            <ReactQuill
+                theme="snow"
+                value={editorValue}
+                modules={modules}
+                formats={formats}
+                onChange={setEditorValue}
+            />
+
+            <AddButton
+                newPost={newPost}
+                handleNewPost={handleNewPost}
+                type="youtube"
+            />
+            <AddButton
+                newPost={newPost}
+                handleNewPost={handleNewPost}
+                type="twitter"
+            />
             <Categories handleNewPost={handleNewPost} />
             <span className="flex mt-2 items-center">
                 <UserIcon className="w-5 mr-1" />
                 Author: {authorPost}
             </span>
-            <button type="submit" className="btn-login ">
+            <button type="submit" className="btn-login w-1/3">
                 {loading ? (
                     <span className="flex items-center justify-center">
                         Adding... <VscLoading className="text-lg ml-2" />

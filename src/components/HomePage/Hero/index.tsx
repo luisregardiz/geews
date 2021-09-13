@@ -4,6 +4,7 @@ import HomeBG from "../../../images/homepage.svg";
 import GoogleIcon from "../../../images/google.svg";
 import { FC } from "react";
 import { useAuth } from "../../../hooks/useAuth";
+import { signInWithGoogle } from "../../../helpers/signInWithGoogle";
 
 interface HeroProps {}
 
@@ -51,7 +52,10 @@ const Hero: FC<HeroProps> = () => {
                                         <UserAddIcon className="w-5 ml-2" />
                                     </button>
                                 </Link>
-                                <button className="btn bg-blue-600  text-white ">
+                                <button
+                                    onClick={signInWithGoogle}
+                                    className="btn bg-blue-600  text-white "
+                                >
                                     Sign in with Google
                                     <img
                                         src={GoogleIcon}

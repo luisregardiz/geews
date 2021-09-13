@@ -14,6 +14,7 @@ import Account from "./pages/Account";
 import { UserProvider } from "./context/UserContext";
 import AccountSettings from "./pages/Account/Settings";
 import Forgot from "./pages/Login/Forgot";
+import PostsCategory from "./pages/Blog/Categories";
 
 function App() {
     return (
@@ -25,8 +26,11 @@ function App() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route exact path="/blog">
+                    <Route exact path="/posts">
                         <Blog />
+                    </Route>
+                    <Route path="/posts/:category">
+                        <PostsCategory />
                     </Route>
                     <PrivateRoute path="/create">
                         <Create />

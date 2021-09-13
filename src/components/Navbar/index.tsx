@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className="flex py-4 px-5 items-center justify-between  ">
             <div className=" px-2 mx-2">
                 <Link to="/">
-                    <span className="text-lg font-black uppercase flex items-center ">
+                    <span className="text-xl font-black flex items-center ">
                         <NewspaperIcon className="w-6 mr-2" />
                         Geews
                     </span>

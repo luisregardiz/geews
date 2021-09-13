@@ -9,7 +9,6 @@ export interface AccountProps {}
 const Account: FC<AccountProps> = () => {
     const { userData } = useContext(UserContext);
     const history = useHistory();
-    console.log(userData);
     useEffect(() => {
         if (userData.user_metadata === undefined) return;
         const metadata = Object.entries(userData.user_metadata);

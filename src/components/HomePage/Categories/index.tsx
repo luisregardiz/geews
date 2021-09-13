@@ -1,24 +1,11 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
+import { categories } from "../../../helpers/categories";
 import { colorCategory } from "../../../helpers/colorCategory";
 
 interface CategoriesProps {}
 
 const Categories: FC<CategoriesProps> = () => {
-    const categories = [
-        "technology",
-        "food",
-        "travel",
-        "music",
-        "lifestyle",
-        "fitness",
-        "sports",
-        "finance",
-        "political",
-        "movies",
-        "cars",
-        "news",
-    ];
     return (
         <div className="min-h-screen p-4">
             <div className="bg-yellow-400 h-1 w-1/4 mx-auto my-6"></div>
