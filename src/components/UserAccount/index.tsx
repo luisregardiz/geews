@@ -1,7 +1,6 @@
 import {
     CheckCircleIcon,
     CogIcon,
-    UserIcon,
     XCircleIcon,
 } from "@heroicons/react/outline";
 import { FC, useContext } from "react";
@@ -10,6 +9,7 @@ import { UserContext } from "../../context/UserContext";
 import { createDate } from "../../helpers/createDate";
 import { useAuth } from "../../hooks/useAuth";
 import { useAvatar } from "../../hooks/useAvatar";
+import NoAvatar from "../Avatar/NoAvatar";
 import Spinner from "../Spinner";
 
 export interface UserAccountProps {}
@@ -34,7 +34,13 @@ const UserAccount: FC<UserAccountProps> = () => {
             );
         }
 
-        return <UserIcon className="w-8" />;
+        return (
+            <NoAvatar
+                name={userData?.user_metadata?.full_name}
+                size={24}
+                color="yellow"
+            />
+        );
     };
     if (!isLogged) return <Spinner />;
 

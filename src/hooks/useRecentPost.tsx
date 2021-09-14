@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Posts } from "../interfaces";
 
-export const useRecentPost = (posts: Posts[], limit?: number) => {
+export const useRecentPost = (posts: Posts[]) => {
     const [recentPost, setRecentPost] = useState<Posts[]>([]);
 
     useEffect(() => {
@@ -12,12 +12,8 @@ export const useRecentPost = (posts: Posts[], limit?: number) => {
                 Date.parse(a.created_at as string)
         );
 
-        if (limit) {
-            const limitPosts = recentPost?.slice(0, limit);
-            return setRecentPost(limitPosts);
-        }
         return setRecentPost(recentPost);
-    }, [posts, limit]);
+    }, [posts]);
 
     return { recentPost };
 };

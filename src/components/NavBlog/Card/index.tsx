@@ -9,7 +9,7 @@ interface NavCardProps {
 }
 
 const NavCard: FC<NavCardProps> = ({ posts }) => {
-    const { recentPost } = useRecentPost(posts as Posts[], 5);
+    const { recentPost } = useRecentPost(posts as Posts[]);
 
     return (
         <div className="space-y-5 p-2">

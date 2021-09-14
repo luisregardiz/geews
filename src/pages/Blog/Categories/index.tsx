@@ -5,7 +5,6 @@ import NetworkError from "../../../components/Error/NetworkError";
 import FilterSection from "../../../components/FilterSection";
 import Loader from "../../../components/Loader";
 import { fetcherPosts } from "../../../helpers/fetcherposts";
-import { useFilterCategory } from "../../../hooks/useFilterCategory";
 import { Posts } from "../../../interfaces";
 import BlogList from "../../../components/Posts";
 
@@ -17,10 +16,9 @@ const PostsCategory: FC<PostsCategoryProps> = () => {
     const { category } = useParams<Params>();
 
     const { data: posts, error } = useSWR(
-        `${process.env.REACT_APP_SUPABASE_URL}/rest/v1/posts?select=*`,
+        `${process.env.REACT_APP_SUPABASE_URL}/rest/v1/posts?category=eq.${category}`,
         fetcherPosts
     );
-    const { filterPosts } = useFilterCategory(posts as Posts[], category);
     if (error)
         return (
             <div className="min-h-screen">
@@ -33,12 +31,12 @@ const PostsCategory: FC<PostsCategoryProps> = () => {
         <main className="section min-h-screen">
             <h1 className="md:text-6xl text-3xl font-black">{category}</h1>
             <FilterSection />
-            {filterPosts.length < 1 && (
+            {posts.length < 1 && (
                 <h4 className="text-2xl font-black">
                     There are no posts in this category.
                 </h4>
             )}
-            <BlogList posts={filterPosts as Posts[]} />
+            <BlogList posts={posts as Posts[]} />
         </main>
     );
 };

@@ -18,7 +18,7 @@ const Avatar: FC<AvatarProps> = ({ url, onUpload }) => {
     const [uploading, setUploading] = useState(false);
     const { userData } = useContext(UserContext);
     const userAvatar: string = userData.user_metadata?.avatar_url;
-
+    const avatarProvider = userAvatar?.includes("https://");
     const { avatarUrl: prevAvatar } = useAvatar(userAvatar);
 
     useEffect(() => {
@@ -133,7 +133,7 @@ const Avatar: FC<AvatarProps> = ({ url, onUpload }) => {
             )}
 
             <div className="relative ">
-                {userAvatar ? (
+                {userAvatar && !avatarProvider ? (
                     <>
                         <label className="cursor-pointer" htmlFor="single">
                             {uploading ? (

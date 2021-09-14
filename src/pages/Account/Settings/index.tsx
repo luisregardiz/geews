@@ -13,18 +13,25 @@ const AccountSettings: FC<AccountSettingsProps> = () => {
     const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
     const { userData } = useContext(UserContext);
     const history = useHistory();
+    const userAvatar = () => {
+        const avatarProvider = userData?.user_metadata?.avatar_url;
+        const verifyAvatarProvider = avatarProvider?.includes("https://");
+        if (verifyAvatarProvider) return "";
+        return userData?.user_metadata?.avatar_url;
+    };
 
     const updateUserInfo = async (userInfo: UserInfo) => {
         const infoUpdate = await supabase.from("profiles").insert(
             [
                 {
                     user_id: userInfo.user_id,
-                    full_name: userInfo.fname,
+                    full_name:
+                        userInfo.fname || userData.user_metadata.full_name,
                     instagram_url: userInfo.instagram,
                     twitter_url: userInfo.twitter,
                     facebook_url: userInfo.facebook,
                     biography: userInfo.bio,
-                    avatar_url: avatarUrl || userData.user_metadata?.avatar_url,
+                    avatar_url: avatarUrl || userAvatar(),
                 },
             ],
             { upsert: true }
@@ -38,7 +45,7 @@ const AccountSettings: FC<AccountSettingsProps> = () => {
                 twitter_url: userInfo.twitter,
                 facebook_url: userInfo.facebook,
                 biography: userInfo.bio,
-                avatar_url: avatarUrl || userData.user_metadata?.avatar_url,
+                avatar_url: avatarUrl || userAvatar(),
             },
         });
 

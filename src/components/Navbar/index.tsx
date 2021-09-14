@@ -8,6 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useScrollBlock } from "../../hooks/useScrollBlock";
 import { supabase } from "../../supabaseClient";
 import Drawer from "../Drawer";
+import Search from "./Search";
 import UserNav from "./User";
 
 const Navbar = () => {
@@ -46,7 +47,9 @@ const Navbar = () => {
                     </span>
                 </Link>
             </div>
+
             <div className="flex items-center">
+                <Search />
                 <UserNav isLogged={isLogged} handleLogout={handleLogout} />
 
                 <div className="flex-none z-40 ">

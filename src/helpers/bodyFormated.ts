@@ -3,7 +3,7 @@ export const bodyFormated = (body: string) => {
         .replaceAll("<h1>", '<h1 className=" font-black">')
         .replaceAll(
             "img",
-            'img className="rounded-lg object-cover  my-5 mx-auto"'
+            'img className="rounded-lg object-contain w-full  my-5 mx-auto"'
         )
         .replaceAll(
             "<p>",

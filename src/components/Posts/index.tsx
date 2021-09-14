@@ -1,6 +1,5 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
 import { colorCategory } from "../../helpers/colorCategory";
 import { dateFormated } from "../../helpers/dateFormated";
 import { useRecentPost } from "../../hooks/useRecentPost";
@@ -12,7 +11,6 @@ export interface PostsListProps {
 }
 
 const PostsList: FC<PostsListProps> = ({ posts }) => {
-    const { userData } = useContext(UserContext);
     const { recentPost } = useRecentPost(posts);
 
     return (
@@ -39,7 +37,7 @@ const PostsList: FC<PostsListProps> = ({ posts }) => {
                             </span>
                         </Link>
                         <div className="flex items-center justify-between mt-2">
-                            <UserInfo user_id={user_id} userData={userData} />
+                            <UserInfo user_id={user_id} />
                             <span className="text-sm font-bold text-gray-600">
                                 {dateFormated(created_at as string)}
                             </span>

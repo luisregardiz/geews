@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useAvatar } from "../../hooks/useAvatar";
 import { Profile } from "../../interfaces";
-import Spinner from "../Spinner";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import NoAvatar from "../Avatar/NoAvatar";
 
 export interface UserProfileProps {
     profile: Profile;
@@ -28,7 +28,7 @@ const UserProfile: FC<UserProfileProps> = ({ profile }) => {
                     className="w-32 h-32 object-cover rounded-full mb-5"
                 />
             ) : (
-                <Spinner />
+                <NoAvatar name={full_name} size={32} color="yellow" />
             )}
 
             <div className="space-y-3">

@@ -4,6 +4,7 @@ import { FC, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import { useAvatar } from "../../../hooks/useAvatar";
+import NoAvatar from "../../Avatar/NoAvatar";
 
 export interface UserNavProps {
     isLogged: boolean;
@@ -28,7 +29,13 @@ const UserNav: FC<UserNavProps> = ({ isLogged, handleLogout }) => {
             );
         }
 
-        return <UserIcon className="w-6" />;
+        return (
+            <NoAvatar
+                name={userData?.user_metadata?.full_name}
+                size={12}
+                color="black"
+            />
+        );
     };
 
     return (

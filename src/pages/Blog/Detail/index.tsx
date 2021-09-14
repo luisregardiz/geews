@@ -33,11 +33,10 @@ const BlogDetail: FC<BlogDetailProps> = () => {
 
     return (
         <div className="section">
-            <div className="grid grid-flow-col lg:grid-cols-4 grid-cols-1 gap-5 place-content-center px-5  ">
+            <div className="grid grid-flow-col lg:grid-cols-4 grid-cols-1 gap-5 place-content-center px-5">
                 {data?.map((post) => (
                     <PostContent key={post.id} post={post as Posts} />
                 ))}
-
                 <NavBlog />
             </div>
         </div>

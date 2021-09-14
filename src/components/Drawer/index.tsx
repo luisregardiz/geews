@@ -9,14 +9,14 @@ export interface DrawerProps {
     open: boolean;
 }
 
-const bgDrawerVariants = {
+export const bgDrawerVariants = {
     hidden: {
         opacity: 0,
     },
     visible: {
         opacity: 1,
         transition: {
-            duration: 0.3,
+            duration: 0.2,
             type: "tween",
         },
     },

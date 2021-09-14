@@ -1,13 +1,13 @@
-import { User } from "@supabase/gotrue-js";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../context/UserContext";
 import { useProfile } from "../../../hooks/useProfile";
 interface UserInfoProps {
     user_id: string;
-    userData: User;
 }
-const UserInfo: FC<UserInfoProps> = ({ user_id, userData }) => {
+const UserInfo: FC<UserInfoProps> = ({ user_id }) => {
+    const { userData } = useContext(UserContext);
     const { userInfo, error } = useProfile(user_id);
     const user = userInfo?.find((user) => user);
 

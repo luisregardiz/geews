@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useAvatar } from "../../../hooks/useAvatar";
 import { useProfile } from "../../../hooks/useProfile";
+import NoAvatar from "../../Avatar/NoAvatar";
 import Spinner from "../../Spinner";
 interface UserInfoProps {
     user_id: string;
@@ -20,11 +21,17 @@ const UserInfo: FC<UserInfoProps> = ({ user_id, userData }) => {
     return (
         <div className="flex  items-center space-x-5 self-start  rounded-md shadow-xl px-5 py-3 border-t-2 border-yellow-400">
             <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center shadow-lg ">
-                {avatarUrl && (
+                {avatarUrl ? (
                     <img
                         src={avatarUrl}
                         alt={user?.full_name}
                         className="w-12 h-12 rounded-full object-cover"
+                    />
+                ) : (
+                    <NoAvatar
+                        name={user?.full_name as string}
+                        size={12}
+                        color="yellow"
                     />
                 )}
             </div>
@@ -39,7 +46,7 @@ const UserInfo: FC<UserInfoProps> = ({ user_id, userData }) => {
                 >
                     {user?.full_name}
                 </Link>
-                <span className=" italic">Blogger | Geek</span>
+                <span className=" italic">Blogger</span>
             </div>
         </div>
     );
