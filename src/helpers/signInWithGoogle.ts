@@ -6,8 +6,7 @@ export const signInWithGoogle = async () => {
         const { user, error } = await supabase.auth.signIn(
             {
                 provider: "google",
-            },
-            { redirectTo: "http://localhost:3000/account" }
+            }
         );
 
         if (error) return toast.error(error.message);
