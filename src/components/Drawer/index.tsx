@@ -73,7 +73,7 @@ const Drawer: FC<DrawerProps> = ({ handleOpenDrawer, isLogged, open }) => {
                                         to="/create"
                                         className="items-drawer px-4  font-bold flex items-center"
                                     >
-                                        Create New Post
+                                        Create new post
                                         <PlusIcon className="w-5 ml-1" />
                                     </Link>
                                     <h4 className="text-2xl font-black text-yellow-700 mb-2 mt-5 px-4">

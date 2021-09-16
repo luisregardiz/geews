@@ -15,6 +15,7 @@ import { UserProvider } from "./context/UserContext";
 import AccountSettings from "./pages/Account/Settings";
 import Forgot from "./pages/Login/Forgot";
 import PostsCategory from "./pages/Blog/Categories";
+import Footer from "./components/Footer";
 
 function App() {
     return (
@@ -60,6 +61,7 @@ function App() {
                         <Error />
                     </Route>
                 </Switch>
+                <Footer />
             </UserProvider>
         </Router>
     );
